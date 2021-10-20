@@ -15,10 +15,13 @@ namespace Hotel.Models
         public DbSet<Telefono> Telefonos { get; set; }
         public DbSet<Habitacion> Habitaciones { get; set; }
 
-
+        public HotelContext(DbContextOptions<HotelContext> dbContextOptions)
+            : base(dbContextOptions)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder option)
         {
-            option.UseSqlServer(@"Data Source = GASTON\SQLEXPRESS01;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
+            //option.UseSqlServer(@"Data Source = GASTON\SQLEXPRESS01;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
         }
 
 
