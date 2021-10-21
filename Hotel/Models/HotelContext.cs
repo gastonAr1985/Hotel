@@ -21,7 +21,7 @@ namespace Hotel.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder option)
         {
-            //option.UseSqlServer(@"Data Source = GASTON\SQLEXPRESS01;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
+            option.UseSqlServer(@"Data Source =  MICA\SQLEXPRESS;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
         }
 
 
