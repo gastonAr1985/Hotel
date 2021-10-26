@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hotel.Models
 {
-    public enum Asistencia
+    public enum AsistenciaEnum
     {
         PRESENTE, TARDE, AUSENTE
     }

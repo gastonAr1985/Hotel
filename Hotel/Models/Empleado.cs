@@ -25,9 +25,9 @@ namespace Hotel.Models
             [Required]
             public List<Telefono> Telefonos { get; set; }
             [Required]
-            public Turno TurnoEnum { get; set; }
+            public TurnoEnum TurnoEnum { get; set; }
             [Required]
-            public Asistencia AsistenciaEnum { get; set; }
+            public AsistenciaEnum AsistenciaEnum { get; set; }
             [Required]
             public List<Habitacion> Habitaciones { get; set; }
 
