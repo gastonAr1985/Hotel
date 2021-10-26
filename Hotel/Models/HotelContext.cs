@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hotel.Models;
 
 namespace Hotel.Models
 {
@@ -21,8 +22,9 @@ namespace Hotel.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder option)
         {
-            option.UseSqlServer(@"Data Source =  MICA\SQLEXPRESS;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
+           // option.UseSqlServer(@"Data Source =  MICA\SQLEXPRESS;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;");
         }
+        public DbSet<Hotel.Models.Organigrama> Organigrama { get; set; }
 
 
     }

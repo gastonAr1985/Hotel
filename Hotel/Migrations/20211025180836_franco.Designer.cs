@@ -4,14 +4,16 @@ using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20211025180836_franco")]
+    partial class franco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,21 +112,6 @@ namespace Hotel.Migrations
                     b.ToTable("Habitaciones");
                 });
 
-            modelBuilder.Entity("Hotel.Models.Organigrama", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("EmpleadosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmpleadosId");
-
-                    b.ToTable("Organigrama");
-                });
-
             modelBuilder.Entity("Hotel.Models.Telefono", b =>
                 {
                     b.Property<int>("Id")
@@ -166,15 +153,6 @@ namespace Hotel.Migrations
                     b.HasOne("Hotel.Models.Empresa", null)
                         .WithMany("Habitaciones")
                         .HasForeignKey("EmpresaId");
-                });
-
-            modelBuilder.Entity("Hotel.Models.Organigrama", b =>
-                {
-                    b.HasOne("Hotel.Models.Empleado", "Empleados")
-                        .WithMany()
-                        .HasForeignKey("EmpleadosId");
-
-                    b.Navigation("Empleados");
                 });
 
             modelBuilder.Entity("Hotel.Models.Telefono", b =>
