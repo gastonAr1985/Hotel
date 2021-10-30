@@ -21,14 +21,16 @@ namespace Hotel.Models
             [Required]
             public double Sueldo { get; set; }
             [Required]
-            public int AniosAntiguedad { get; set; }
-            [Required]
+            [Display(Name = "Fecha de Ingreso")]
+            public DateTime FechaIngreso { get; set; }
+           
             public List<Telefono> Telefonos { get; set; }
-            [Required]
+           
+            [Display(Name ="Turno")]
             public TurnoEnum TurnoEnum { get; set; }
-            [Required]
-            public AsistenciaEnum AsistenciaEnum { get; set; }
-            [Required]
+            
+            public  List<Asistencia> ListaAsistencia { get; set; }
+           
             public List<Habitacion> Habitaciones { get; set; }
 
         }
