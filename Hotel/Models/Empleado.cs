@@ -12,8 +12,7 @@ namespace Hotel.Models
         
             [Key]
             public int Id { get; set; }
-            [Required]
-            public String Password { get; set; }
+            
             [Required]
             public string Nombre { get; set; }
             [Required]
