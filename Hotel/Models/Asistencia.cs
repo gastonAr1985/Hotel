@@ -15,6 +15,8 @@ namespace Hotel.Models
 
         public AsistenciaEnum Estado { get; set; }
 
-        public Empleado Empleado { get; set; }
+        public Empleado Empleado{ get; set; }
+
+        public int EmpleadoId { get; set; }
     }
 }

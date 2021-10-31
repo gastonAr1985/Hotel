@@ -67,7 +67,7 @@ namespace Hotel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AsistenciaId,Dia,Estado")] Asistencia asistencia)
+        public async Task<IActionResult> Create([Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Hotel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AsistenciaId,Dia,Estado")] Asistencia asistencia)
+        public async Task<IActionResult> Edit(int id, [Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
         {
             if (id != asistencia.AsistenciaId)
             {
