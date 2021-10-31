@@ -20,7 +20,7 @@ namespace Hotel.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Empleados.ToList());
         }
 
 
