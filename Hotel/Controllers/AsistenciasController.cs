@@ -9,23 +9,23 @@ using Hotel.Models;
 
 namespace Hotel.Controllers
 {
-    public class EmpleadoesController : Controller
+    public class AsistenciasController : Controller
     {
         private readonly HotelContext _context;
 
-        public EmpleadoesController(HotelContext context)
+        public AsistenciasController(HotelContext context)
         {
             _context = context;
         }
 
-        // GET: Empleadoes
+        // GET: Asistencias
         public async Task<IActionResult> Index()
         {
-
-            return View(await _context.Empleados.ToListAsync());
+            ViewBag.Empleados = _context.Empleados.ToList();
+            return View(await _context.Asistencia.ToListAsync());
         }
 
-        // GET: Empleadoes/Details/5
+        // GET: Asistencias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,49 +33,53 @@ namespace Hotel.Controllers
                 return NotFound();
             }
 
-            var empleado = await _context.Empleados
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (empleado == null)
+            var asistencia = await _context.Asistencia
+                .FirstOrDefaultAsync(m => m.AsistenciaId == id);
+            if (asistencia == null)
             {
                 return NotFound();
             }
 
-           ViewData["Antiguedad"]= CalcularAntiguedad(empleado);
-            
-
-
-            return View(empleado);
+            return View(asistencia);
         }
 
-        // GET: Empleadoes/Create
+        // GET: Asistencias/Create
         public IActionResult Create()
         {
-            var turnos = new List<TurnoEnum>();
-            foreach (TurnoEnum t in Enum.GetValues(typeof(TurnoEnum)))
+            var asistencia = new List<AsistenciaEnum>();
+
+            foreach (AsistenciaEnum a in Enum.GetValues(typeof(AsistenciaEnum)))
             {
-                turnos.Add(t);
+                asistencia.Add(a);
             }
-            ViewData["tr"] = turnos;
+            ViewData["as"] = asistencia;
+
+            ViewBag.Empleados = _context.Empleados.Select(x => new SelectListItem
+            {
+                Text = x.Nombre,
+                Value = x.Id.ToString()
+            }).ToList();
+
             return View();
         }
 
-        // POST: Empleadoes/Create
+        // POST: Asistencias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(empleado);
+                _context.Add(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleado);
+            return View(asistencia);
         }
 
-        // GET: Empleadoes/Edit/5
+        // GET: Asistencias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,22 +87,22 @@ namespace Hotel.Controllers
                 return NotFound();
             }
 
-            var empleado = await _context.Empleados.FindAsync(id);
-            if (empleado == null)
+            var asistencia = await _context.Asistencia.FindAsync(id);
+            if (asistencia == null)
             {
                 return NotFound();
             }
-            return View(empleado);
+            return View(asistencia);
         }
 
-        // POST: Empleadoes/Edit/5
+        // POST: Asistencias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
         {
-            if (id != empleado.Id)
+            if (id != asistencia.AsistenciaId)
             {
                 return NotFound();
             }
@@ -107,12 +111,12 @@ namespace Hotel.Controllers
             {
                 try
                 {
-                    _context.Update(empleado);
+                    _context.Update(asistencia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpleadoExists(empleado.Id))
+                    if (!AsistenciaExists(asistencia.AsistenciaId))
                     {
                         return NotFound();
                     }
@@ -123,10 +127,10 @@ namespace Hotel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleado);
+            return View(asistencia);
         }
 
-        // GET: Empleadoes/Delete/5
+        // GET: Asistencias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,38 +138,30 @@ namespace Hotel.Controllers
                 return NotFound();
             }
 
-            var empleado = await _context.Empleados
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (empleado == null)
+            var asistencia = await _context.Asistencia
+                .FirstOrDefaultAsync(m => m.AsistenciaId == id);
+            if (asistencia == null)
             {
                 return NotFound();
             }
 
-            return View(empleado);
+            return View(asistencia);
         }
 
-        // POST: Empleadoes/Delete/5
+        // POST: Asistencias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var empleado = await _context.Empleados.FindAsync(id);
-            _context.Empleados.Remove(empleado);
+            var asistencia = await _context.Asistencia.FindAsync(id);
+            _context.Asistencia.Remove(asistencia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmpleadoExists(int id)
+        private bool AsistenciaExists(int id)
         {
-            return _context.Empleados.Any(e => e.Id == id);
+            return _context.Asistencia.Any(e => e.AsistenciaId == id);
         }
-        public int CalcularAntiguedad(Empleado empleado) {
-            
-            int edadCalculada = DateTime.Now.Year - empleado.FechaIngreso.Year;
-            ViewData["AntiguedadEmpleado"] = edadCalculada;
-
-            return edadCalculada;
-        }
-
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Hotel.Models.Asistencia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Registro de Asistencias</h1>
+
+<p>
+    <a asp-action="Create">Crear nueva asistencia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Empleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    List<Empleado> Empleados = ViewBag.Empleados;
+    Empleado Emp = (from e in Empleados where e.Id == item.EmpleadoId select e).FirstOrDefault();
+        <tr>
+            <td>
+                <label>@Emp.Nombre</label>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AsistenciaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AsistenciaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AsistenciaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

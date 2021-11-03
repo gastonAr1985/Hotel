@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Hotel.Models
 {
-    public class Mantenimiento : Maestranza
+    public enum TurnoEnum
     {
+        MANIANA, TARDE, NOCHE
 
     }
 }

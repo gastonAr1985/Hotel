@@ -12,8 +12,7 @@ namespace Hotel.Models
         
             [Key]
             public int Id { get; set; }
-            [Required]
-            public String Password { get; set; }
+            
             [Required]
             public string Nombre { get; set; }
             [Required]
@@ -21,14 +20,16 @@ namespace Hotel.Models
             [Required]
             public double Sueldo { get; set; }
             [Required]
-            public int AniosAntiguedad { get; set; }
-            [Required]
+            [Display(Name = "Fecha de Ingreso")]
+            public DateTime FechaIngreso { get; set; }
+           
             public List<Telefono> Telefonos { get; set; }
-            [Required]
-            public Turno TurnoEnum { get; set; }
-            [Required]
-            public Asistencia AsistenciaEnum { get; set; }
-            [Required]
+           
+            [Display(Name ="Turno")]
+            public TurnoEnum TurnoEnum { get; set; }
+            
+            public  List<Asistencia> ListaAsistencia { get; set; }
+           
             public List<Habitacion> Habitaciones { get; set; }
 
         }

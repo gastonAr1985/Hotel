@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Hotel.Models
 {
-    public enum Turno
+    public enum AsistenciaEnum
     {
-        MANIANA, TARDE, NOCHE
-
+        PRESENTE, TARDE, AUSENTE
     }
 }
