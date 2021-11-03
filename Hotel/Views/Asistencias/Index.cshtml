@@ -26,9 +26,11 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    List<Empleado> Empleados = ViewBag.Empleados;
+    Empleado Emp = (from e in Empleados where e.Id == item.EmpleadoId select e).FirstOrDefault();
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                <label>@Emp.Nombre</label>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Dia)

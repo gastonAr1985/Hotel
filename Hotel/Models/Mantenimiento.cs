@@ -7,5 +7,6 @@ namespace Hotel.Models
 {
     public class Mantenimiento : Maestranza
     {
+
     }
 }

@@ -21,6 +21,7 @@ namespace Hotel.Controllers
         // GET: Empleadoes
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Empleados.ToListAsync());
         }
 
@@ -38,6 +39,10 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
+
+           ViewData["Antiguedad"]= CalcularAntiguedad(empleado);
+            
+
 
             return View(empleado);
         }
@@ -154,5 +159,13 @@ namespace Hotel.Controllers
         {
             return _context.Empleados.Any(e => e.Id == id);
         }
+        public int CalcularAntiguedad(Empleado empleado) {
+            
+            int edadCalculada = DateTime.Now.Year - empleado.FechaIngreso.Year;
+            ViewData["AntiguedadEmpleado"] = edadCalculada;
+
+            return edadCalculada;
+        }
+
     }
 }

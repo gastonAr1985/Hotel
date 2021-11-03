@@ -21,6 +21,7 @@ namespace Hotel.Controllers
         // GET: Asistencias
         public async Task<IActionResult> Index()
         {
+            ViewBag.Empleados = _context.Empleados.ToList();
             return View(await _context.Asistencia.ToListAsync());
         }
 
