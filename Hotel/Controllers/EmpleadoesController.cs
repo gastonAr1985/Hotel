@@ -23,6 +23,8 @@ namespace Hotel.Controllers
         {
             var emp = from e in _context.Empleados select e;
 
+           
+
             if (!String.IsNullOrEmpty(NombreEmpleado))
             {
                 emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));

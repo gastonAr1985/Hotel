@@ -18,7 +18,8 @@ namespace Hotel.Models
             [Required]
             public string Apellido { get; set; }
             [Required]
-            public double Sueldo { get; set; }
+             [Display(Name = "Sueldo Base")]
+        public double Sueldo { get; set; }
             [Required]
             [Display(Name = "Fecha de Ingreso")]
             public DateTime FechaIngreso { get; set; }
@@ -27,7 +28,8 @@ namespace Hotel.Models
            
             [Display(Name ="Turno")]
             public TurnoEnum TurnoEnum { get; set; }
-            
+
+            public int Antiguedad { get; set; }
             public  List<Asistencia> ListaAsistencia { get; set; }
            
             public List<Habitacion> Habitaciones { get; set; }
