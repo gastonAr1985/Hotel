@@ -19,10 +19,18 @@ namespace Hotel.Controllers
         }
 
         // GET: Asistencias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String nombre)
         {
+            var emp = from e in _context.Asistencia
+                         select e;
+
+            if(!String.IsNullOrEmpty(nombre))
+            {
+                emp = emp.Where(s => s.Empleado.Nombre!.Contains(nombre));
+            }
+
             ViewBag.Empleados = _context.Empleados.ToList();
-            return View(await _context.Asistencia.ToListAsync());
+            return View(await emp.ToListAsync());
         }
 
         // GET: Asistencias/Details/5

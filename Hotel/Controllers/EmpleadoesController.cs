@@ -19,10 +19,16 @@ namespace Hotel.Controllers
         }
 
         // GET: Empleadoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string NombreEmpleado = null)
         {
+            var emp = from e in _context.Empleados select e;
 
-            return View(await _context.Empleados.ToListAsync());
+            if (!String.IsNullOrEmpty(NombreEmpleado))
+            {
+                emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));
+            }
+
+            return View(await emp.ToListAsync());
         }
 
         // GET: Empleadoes/Details/5
