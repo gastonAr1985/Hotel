@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@{
+    var Antiguedad=ViewData["Antiguedad"];
+}
 <h1>Lista de Empleados</h1>
 
 <p>
@@ -26,17 +28,25 @@
             <th>
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sueldo)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.FechaIngreso)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.TurnoEnum)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
                 <p>Antiguedad</p>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sueldo)
+            </th>
+            <th>
+                <p>Sueldo Total</p>
             </th>
 
             <th></th>
@@ -47,34 +57,43 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sueldo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaIngreso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TurnoEnum)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => Antiguedad)*@
-                </td>
-                <td>
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TurnoEnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cargo)
+            </td>
+            <td>
+                <a asp-action="CalcularAntiguedad" asp-route-id="@item.Id">Ver Antiguedad</a>
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sueldo)
+            </td>
+            <td>
+                <a asp-action="CalcularSueldo" asp-route-id="@item.Id">Ver Sueldo Final</a>
+            </td>
+            <td>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+            </td>
+        </tr>
         }
     </tbody>
 </table>

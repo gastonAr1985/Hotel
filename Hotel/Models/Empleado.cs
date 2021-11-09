@@ -29,7 +29,10 @@ namespace Hotel.Models
             [Display(Name ="Turno")]
             public TurnoEnum TurnoEnum { get; set; }
 
-            public int Antiguedad { get; set; }
+           [Display(Name = "Cargo")]
+           public CargoEnum Cargo { get; set; }
+
+        public int Antiguedad { get; set; }
             public  List<Asistencia> ListaAsistencia { get; set; }
            
             public List<Habitacion> Habitaciones { get; set; }

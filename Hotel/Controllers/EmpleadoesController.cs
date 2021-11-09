@@ -11,6 +11,13 @@ namespace Hotel.Controllers
 {
     public class EmpleadoesController : Controller
     {
+        const double ADICIONAL_MANTENIMIENTO = 500;
+        const double ADICIONAL_LIMPIEZA = 0;
+        const double ADICIONAL_JEFE = 5000;
+        const double ADICIONAL_ADMINISTRADOR = 2000;
+        const double ADICIONAL_RECEPCIONISTA = 700;
+        
+
         private readonly HotelContext _context;
 
         public EmpleadoesController(HotelContext context)
@@ -21,15 +28,19 @@ namespace Hotel.Controllers
         // GET: Empleadoes
         public async Task<IActionResult> Index(string NombreEmpleado = null)
         {
-            var emp = from e in _context.Empleados select e;
 
-           
+            
+            /// Aca me traigo el empleado para poder filtrarlo en la busqueda
+
+            var emp = from e in _context.Empleados select e;
 
             if (!String.IsNullOrEmpty(NombreEmpleado))
             {
                 emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));
-            }
 
+            }
+            
+            
             return View(await emp.ToListAsync());
         }
 
@@ -48,8 +59,8 @@ namespace Hotel.Controllers
                 return NotFound();
             }
 
-           ViewData["Antiguedad"]= CalcularAntiguedad(empleado);
-            
+            //ViewData["Antiguedad"] = CalcularAntiguedad(empleado);
+
 
 
             return View(empleado);
@@ -64,6 +75,14 @@ namespace Hotel.Controllers
                 turnos.Add(t);
             }
             ViewData["tr"] = turnos;
+
+            var cargos = new List<CargoEnum>();
+            foreach (CargoEnum c in Enum.GetValues(typeof(CargoEnum)))
+            {
+                cargos.Add(c);
+            }
+            ViewData["car"] = cargos;
+
             return View();
         }
 
@@ -72,7 +91,7 @@ namespace Hotel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,CargoEnum,Telefono")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
@@ -167,13 +186,53 @@ namespace Hotel.Controllers
         {
             return _context.Empleados.Any(e => e.Id == id);
         }
-        public int CalcularAntiguedad(Empleado empleado) {
+        public async Task<int> CalcularAntiguedad(int? id) {
             
-            int edadCalculada = DateTime.Now.Year - empleado.FechaIngreso.Year;
-            ViewData["AntiguedadEmpleado"] = edadCalculada;
+            if (id == null)
+            {
+                return 0;
+            }
 
+            var empleado = await _context.Empleados
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (empleado == null)
+            {
+                return 0;
+            }
+
+            int edadCalculada = DateTime.Now.Year - empleado.FechaIngreso.Year;
+
+            
             return edadCalculada;
         }
+
+        public double CalcularSueldo(int id) {
+            
+            double sueldoTotal = 0;
+            var empleado = _context.Empleados
+                .FirstOrDefault(m => m.Id == id);
+
+            switch (empleado.Cargo) {
+                case CargoEnum.JEFE: sueldoTotal = empleado.Sueldo + ADICIONAL_JEFE;
+                    break;
+                case CargoEnum.ADMINISTRACION:
+                    sueldoTotal = empleado.Sueldo + ADICIONAL_ADMINISTRADOR;
+                    break;
+                case CargoEnum.MANTENIMIENTO:
+                    sueldoTotal = empleado.Sueldo + ADICIONAL_MANTENIMIENTO;
+                    break;
+                case CargoEnum.RECEPCIONISTA:
+                    sueldoTotal = empleado.Sueldo + ADICIONAL_RECEPCIONISTA;
+                    break;
+                case CargoEnum.LIMPIEZA:
+                    sueldoTotal = empleado.Sueldo + ADICIONAL_LIMPIEZA;
+                    break;
+
+
+            }
+            return sueldoTotal;
+        }
+
 
     }
 }

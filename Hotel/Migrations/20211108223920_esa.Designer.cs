@@ -4,19 +4,21 @@ using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20211108223920_esa")]
+    partial class esa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Hotel.Models.Asistencia", b =>
@@ -160,9 +162,8 @@ namespace Hotel.Migrations
                     b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -213,15 +214,13 @@ namespace Hotel.Migrations
 
             modelBuilder.Entity("Hotel.Models.Telefono", b =>
                 {
-                    b.HasOne("Hotel.Models.Empleado", "Empleado")
+                    b.HasOne("Hotel.Models.Empleado", null)
                         .WithMany("Telefonos")
                         .HasForeignKey("EmpleadoId");
 
                     b.HasOne("Hotel.Models.Empresa", null)
                         .WithMany("Telefonos")
                         .HasForeignKey("EmpresaId");
-
-                    b.Navigation("Empleado");
                 });
 
             modelBuilder.Entity("Hotel.Models.Empleado", b =>

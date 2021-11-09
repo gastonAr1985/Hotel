@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace Hotel.Models
 {
-    public class Limpieza : Maestranza
+    public enum CargoEnum
     {
+
+        JEFE, ADMINISTRACION, LIMPIEZA, MANTENIMIENTO, RECEPCIONISTA 
     }
 }
