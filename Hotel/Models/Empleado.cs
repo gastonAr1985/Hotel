@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,12 +20,16 @@ namespace Hotel.Models
             public string Apellido { get; set; }
             [Required]
              [Display(Name = "Sueldo Base")]
-        public double Sueldo { get; set; }
+            public double Sueldo { get; set; }
+
             [Required]
             [Display(Name = "Fecha de Ingreso")]
             public DateTime FechaIngreso { get; set; }
-           
-            public List<Telefono> Telefonos { get; set; }
+        
+            //[ForeignKey("Telefono")]
+            //public int IdTelefono { get; set; }
+
+            public virtual List<Telefono> Telefonos { get; set; }
            
             [Display(Name ="Turno")]
             public TurnoEnum TurnoEnum { get; set; }
@@ -32,7 +37,9 @@ namespace Hotel.Models
            [Display(Name = "Cargo")]
            public CargoEnum Cargo { get; set; }
 
-        public int Antiguedad { get; set; }
+   
+
+            public int Antiguedad { get; set; }
             public  List<Asistencia> ListaAsistencia { get; set; }
            
             public List<Habitacion> Habitaciones { get; set; }

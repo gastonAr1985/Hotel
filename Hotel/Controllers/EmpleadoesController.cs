@@ -26,24 +26,41 @@ namespace Hotel.Controllers
         }
 
         // GET: Empleadoes
-        public async Task<IActionResult> Index(string NombreEmpleado = null)
+        public async Task<IActionResult> Index(/*string NombreEmpleado = null*/)
         {
 
-            
+           
             /// Aca me traigo el empleado para poder filtrarlo en la busqueda
 
-            var emp = from e in _context.Empleados select e;
+            //var emp = from e in _context.Empleados select e;
 
-            if (!String.IsNullOrEmpty(NombreEmpleado))
-            {
-                emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));
+            //if (!String.IsNullOrEmpty(NombreEmpleado))
+            //{
+            //    emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));
 
-            }
+            //}
             
             
-            return View(await emp.ToListAsync());
+            return View(await _context.Empleados.ToListAsync());
         }
+        public async Task<IActionResult> Seleccion(int id)
+        {
+            var empleado = await _context.Empleados
+               .FirstOrDefaultAsync(m => m.Id == id);
 
+
+            if (empleado == null)
+            {
+                return NotFound();
+            }
+
+           
+
+            ViewData["telefonos"] = ListaDeTelefonos(id);
+            ViewBag.sueldo = CalcularSueldo(id);
+            ViewBag.antiguedad = CalcularAntiguedad(id);
+            return View(empleado);
+        }
         // GET: Empleadoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -186,15 +203,15 @@ namespace Hotel.Controllers
         {
             return _context.Empleados.Any(e => e.Id == id);
         }
-        public async Task<int> CalcularAntiguedad(int? id) {
+        public int CalcularAntiguedad(int? id) {
             
             if (id == null)
             {
                 return 0;
             }
 
-            var empleado = await _context.Empleados
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var empleado =  _context.Empleados
+                .FirstOrDefault(m => m.Id == id);
             if (empleado == null)
             {
                 return 0;
@@ -209,7 +226,7 @@ namespace Hotel.Controllers
         public double CalcularSueldo(int id) {
             
             double sueldoTotal = 0;
-            var empleado = _context.Empleados
+            var empleado =  _context.Empleados
                 .FirstOrDefault(m => m.Id == id);
 
             switch (empleado.Cargo) {
@@ -232,7 +249,17 @@ namespace Hotel.Controllers
             }
             return sueldoTotal;
         }
+        
+        public List<Telefono> ListaDeTelefonos(int id)
+        {
+            var tel = from e in _context.Telefonos
+                      select e;
 
+
+            tel = tel.Where(s => s.EmpleadoId == id);
+
+            return (tel.ToList());
+        }
 
     }
 }

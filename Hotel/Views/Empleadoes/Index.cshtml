@@ -40,7 +40,7 @@
                 @Html.DisplayNameFor(model => model.Cargo)
             </th>
             <th>
-                <p>Antiguedad</p>
+                @Html.DisplayNameFor(model => model.Antiguedad)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Sueldo)
@@ -76,8 +76,8 @@
                 @Html.DisplayFor(modelItem => item.Cargo)
             </td>
             <td>
-                <a asp-action="CalcularAntiguedad" asp-route-id="@item.Id">Ver Antiguedad</a>
-                
+                @Html.DisplayFor(modelItem => item.Antiguedad)
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Sueldo)
@@ -88,9 +88,10 @@
             <td>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                <a asp-action="Seleccion" asp-route-id="@item.Id">Selecionar</a>
 
             </td>
         </tr>

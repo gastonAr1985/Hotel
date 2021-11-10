@@ -7,7 +7,7 @@ namespace Hotel.Models
 {
     public enum TurnoEnum
     {
-        MANIANA, TARDE, NOCHE
+        MAÑANA, TARDE, NOCHE
 
     }
 }
