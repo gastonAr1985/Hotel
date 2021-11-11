@@ -87,6 +87,7 @@ namespace Hotel.Controllers
         public  ActionResult Create()
         {
             var turnos = new List<TurnoEnum>();
+
             foreach (TurnoEnum t in Enum.GetValues(typeof(TurnoEnum)))
             {
                 turnos.Add(t);
@@ -109,7 +110,7 @@ namespace Hotel.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,CargoEnum,Telefonos")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,Cargo,Telefonos")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
