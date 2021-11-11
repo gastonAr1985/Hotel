@@ -40,14 +40,12 @@
                 @Html.DisplayNameFor(model => model.Cargo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Antiguedad)
+              <p> Años en la empresa </p> 
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Sueldo)
             </th>
-            <th>
-                <p>Sueldo Total</p>
-            </th>
+            
 
             <th></th>
         </tr>
@@ -82,9 +80,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Sueldo)
             </td>
-            <td>
-                <a asp-action="CalcularSueldo" asp-route-id="@item.Id">Ver Sueldo Final</a>
-            </td>
+            
             <td>
             </td>
             <td>

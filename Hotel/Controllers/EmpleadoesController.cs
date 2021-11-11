@@ -84,7 +84,7 @@ namespace Hotel.Controllers
         }
 
         // GET: Empleadoes/Create
-        public IActionResult Create()
+        public  ActionResult Create()
         {
             var turnos = new List<TurnoEnum>();
             foreach (TurnoEnum t in Enum.GetValues(typeof(TurnoEnum)))
@@ -100,19 +100,26 @@ namespace Hotel.Controllers
             }
             ViewData["car"] = cargos;
 
+
+
+
             return View();
         }
 
-        // POST: Empleadoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,CargoEnum,Telefono")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,CargoEnum,Telefonos")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
+
+                //var Telefonito = new Telefono(); 
+                //_context.Telefonos.Add()
+
                 _context.Add(empleado);
+                
+               
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -135,9 +142,6 @@ namespace Hotel.Controllers
             return View(empleado);
         }
 
-        // POST: Empleadoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum")] Empleado empleado)
@@ -193,6 +197,20 @@ namespace Hotel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var tel = from e in _context.Telefonos
+                      select e;
+
+            // Buscamos el el telefono correspondiente al empleado id , recorremos sus telefonos los borramos y guardamos.
+            tel = tel.Where(s => s.EmpleadoId == id);
+            foreach (var t in tel)
+            {
+                _context.Telefonos.Remove(t);
+               
+            }
+            await _context.SaveChangesAsync();
+
+            /////////////////////////////////////////////////////////////
+           
             var empleado = await _context.Empleados.FindAsync(id);
             _context.Empleados.Remove(empleado);
             await _context.SaveChangesAsync();

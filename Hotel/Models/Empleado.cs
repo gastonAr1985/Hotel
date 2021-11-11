@@ -11,9 +11,23 @@ namespace Hotel.Models
     {
        
         
-            [Key]
-            public int Id { get; set; }
-            
+        [Key]
+        public int Id { get; set; }
+        //Navegacional
+        public List<Asistencia> ListaAsistencia { get; set; }
+
+        public List<Habitacion> Habitaciones { get; set; }
+        public  List<Telefono> Telefonos { get; set; }
+
+
+
+        [Display(Name = "Turno")]
+        public TurnoEnum TurnoEnum { get; set; }
+
+        [Display(Name = "Cargo")]
+        public CargoEnum Cargo { get; set; }
+
+
             [Required]
             public string Nombre { get; set; }
             [Required]
@@ -26,23 +40,12 @@ namespace Hotel.Models
             [Display(Name = "Fecha de Ingreso")]
             public DateTime FechaIngreso { get; set; }
         
-            //[ForeignKey("Telefono")]
-            //public int IdTelefono { get; set; }
+       
 
-            public virtual List<Telefono> Telefonos { get; set; }
-           
-            [Display(Name ="Turno")]
-            public TurnoEnum TurnoEnum { get; set; }
-
-           [Display(Name = "Cargo")]
-           public CargoEnum Cargo { get; set; }
-
-   
-
+          
+        
             public int Antiguedad { get; set; }
-            public  List<Asistencia> ListaAsistencia { get; set; }
            
-            public List<Habitacion> Habitaciones { get; set; }
 
         }
     }

@@ -11,12 +11,17 @@ namespace Hotel.Models
         [Key]
         public int AsistenciaId { get; set; }
 
-        public DateTime Dia { get; set; }
+        //Navegacional
+        public Empleado Empleado { get; set; }
+
+        public int EmpleadoId { get; set; }
 
         public AsistenciaEnum Estado { get; set; }
 
-        public Empleado Empleado{ get; set; }
+        public DateTime Dia { get; set; }
 
-        public int EmpleadoId { get; set; }
+        
+
+        
     }
 }
