@@ -4,14 +4,16 @@ using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20211112184548_francohabitaciones")]
+    partial class francohabitaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +110,7 @@ namespace Hotel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EmpleadoAcargoId")
+                    b.Property<int?>("EmpeladoAcargoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmpresaId")
@@ -117,21 +119,15 @@ namespace Hotel.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<int>("IdEmpleado")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Mantenimiento")
                         .HasColumnType("bit");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoMantenimiento")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpleadoAcargoId");
+                    b.HasIndex("EmpeladoAcargoId");
 
                     b.HasIndex("EmpresaId");
 
@@ -199,15 +195,15 @@ namespace Hotel.Migrations
 
             modelBuilder.Entity("Hotel.Models.Habitacion", b =>
                 {
-                    b.HasOne("Hotel.Models.Empleado", "EmpleadoAcargo")
+                    b.HasOne("Hotel.Models.Empleado", "EmpeladoAcargo")
                         .WithMany("Habitaciones")
-                        .HasForeignKey("EmpleadoAcargoId");
+                        .HasForeignKey("EmpeladoAcargoId");
 
                     b.HasOne("Hotel.Models.Empresa", null)
                         .WithMany("Habitaciones")
                         .HasForeignKey("EmpresaId");
 
-                    b.Navigation("EmpleadoAcargo");
+                    b.Navigation("EmpeladoAcargo");
                 });
 
             modelBuilder.Entity("Hotel.Models.Organigrama", b =>

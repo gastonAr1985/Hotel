@@ -1,1 +1,66 @@
-﻿
+﻿@model IEnumerable<Hotel.Models.Habitacion>
+
+<h4>Lista Habitaciones</h4>
+
+<p>
+    <a asp-action="Crear">Agregar Habitacion</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Mantenimiento)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EmpleadoAcargo)
+            </th>
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            List<Empleado> Empleados = ViewBag.Empleados;
+
+            Empleado Emp = (from e in Empleados where e.Id == item.IdEmpleado select e).FirstOrDefault();
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mantenimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Emp.Nombre)
+                </td>
+               
+
+                <td>
+                </td>
+                <td>
+                   
+                    <a asp-action="Seleccion" asp-route-id="@item.Id">Selecionar</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

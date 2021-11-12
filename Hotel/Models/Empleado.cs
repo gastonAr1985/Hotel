@@ -9,11 +9,12 @@ namespace Hotel.Models
 {
     public class Empleado
     {
-       
-        
+
+
         [Key]
         public int Id { get; set; }
         //Navegacional
+        
         public List<Asistencia> ListaAsistencia { get; set; }
         public List<Habitacion> Habitaciones { get; set; }
         public  List<Telefono> Telefonos { get; set; }

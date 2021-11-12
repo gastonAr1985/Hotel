@@ -30,6 +30,7 @@ namespace Hotel.Controllers
             }
 
             ViewBag.Empleados = _context.Empleados.ToList();
+
             return View(await emp.ToListAsync());
         }
 

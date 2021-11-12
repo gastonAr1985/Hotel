@@ -64,6 +64,7 @@ namespace Hotel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            // trae el empleado y lo anexa al objeto
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido", telefono.EmpleadoId);
             return View(telefono);
         }
