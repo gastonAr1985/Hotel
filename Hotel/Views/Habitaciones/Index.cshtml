@@ -41,12 +41,31 @@
                     @Html.DisplayFor(modelItem => item.Numero)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
+                    @*@Html.DisplayFor(modelItem => item.Estado)*@
+
+                    @if (item.Estado)
+                    {
+                        <button ></button>
+                    }
+                    else { 
+                
+                         <button></button>
+                    }
+
+                    </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Mantenimiento)
-                </td>
+                    @*@Html.DisplayFor(modelItem => item.Mantenimiento)*@
+                    @if (item.Mantenimiento)
+                    {
+                        <button ;></button>
+                    }
+                    else
+                    {
+                
+                       <button></button>
+                    }
+</td>
                 <td>
                     @Html.DisplayFor(modelItem => Emp.Nombre)
                 </td>
