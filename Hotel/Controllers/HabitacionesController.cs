@@ -129,21 +129,31 @@ namespace Hotel.Controllers
             
            
         }
-        //public void OcuparHabitacion(Habitacion h)
-        //{
-        //    if (h.Ocupacion == EstadoDeUsos.LIBRE && h.Ocupacion != EstadoDeUsos.FUERA_DE_USO)
-        //    {
-        //        h.Ocupacion = EstadoDeUsos.OCUPADA;
-        //        _context.Update(h.Ocupacion);
-        //        _context.SaveChanges();
-        //    }
+        public void OcuparHabitacion(int id)
+        {
+            Habitacion h = BuscarHabitacion(id);
 
-        //}
+            if (h.Ocupacion == EstadoDeUsos.LIBRE && h.Ocupacion != EstadoDeUsos.FUERA_DE_USO)
+            {
+                h.Ocupacion = EstadoDeUsos.OCUPADA;
+                _context.Update(h);
+                _context.SaveChanges();
+            }
+            
+        }
 
-        //public DesocuparHabitacion()
-        //{
+        public void DesocuparHabitacion(int id)
+        {
+            Habitacion h = BuscarHabitacion(id);
 
-        //}
+            if (h.Ocupacion == EstadoDeUsos.OCUPADA && h.Ocupacion != EstadoDeUsos.FUERA_DE_USO)
+            {
+                h.Ocupacion = EstadoDeUsos.LIBRE;
+                _context.Update(h);
+                _context.SaveChanges();
+            }
+
+        }
 
         //public LimpiarHabitacion()
         //{

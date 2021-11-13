@@ -33,9 +33,9 @@ namespace Hotel.Models
 
             [Required]
             public string Apellido { get; set; }
-            public int Antiguedad { get; set; }
+        public int Antiguedad { get; set; }
 
-            [Required]
+        [Required]
              [Display(Name = "Sueldo Base")]
             public double Sueldo { get; set; }
 

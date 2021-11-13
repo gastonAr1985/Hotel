@@ -14,6 +14,7 @@ namespace Hotel.Models
 
         //NAVEGACIONAL
         public int IdEmpleado { get; set; }
+        
         public  Empleado EmpleadoAcargo { get; set; }
 
 

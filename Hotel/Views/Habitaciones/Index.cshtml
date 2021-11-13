@@ -23,7 +23,9 @@
             <th>
                 <p>Empleado Responsable</p>
             </th>
-
+            <th>
+                <p>Disponibilidad</p>
+            </th>
         </tr>
     </thead>
 
@@ -69,12 +71,15 @@
                         @*<a asp-action="InformarMantenimiento" asp-route-id="@item.Id">Informar</a>*@
                     }
                 </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => Emp.Nombre)
                 </td>
                
 
                 <td>
+                    <a  asp-action="OcuparHabitacion" asp-route-id="@item.Id"> Ocupar </a>
+                    <a  asp-action="DesocuparHabitacion" asp-route-id="@item.Id"> Desocupar </a>
                 </td>
                 
             </tr>

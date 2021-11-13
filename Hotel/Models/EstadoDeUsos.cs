@@ -4,4 +4,5 @@
     {
         LIBRE, OCUPADA, FUERA_DE_USO
     }
+
 }

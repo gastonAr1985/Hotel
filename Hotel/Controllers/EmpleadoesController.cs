@@ -29,9 +29,6 @@ namespace Hotel.Controllers
         public async Task<IActionResult> Index()
         {
 
-           
-            
-            
             return View(await _context.Empleados.ToListAsync());
         }
         public async Task<IActionResult> Seleccion(int id)
