@@ -1,41 +1,109 @@
-﻿@model IEnumerable<Hotel.Models.Empleado>
+﻿@model Hotel.Models.Empleado
 
-<h1 > Organigrama de la empresa</h1>
-<br>
+@{var lista = ViewBag.Empleados;}
 
-<table class="table">
+<link href="~/lib/bootstrap/dist/css/Organigrama.css" rel="stylesheet" />
 
-    <thead>
-        <tr>
+<h1> Organigrama de la empresa</h1>
+<hr />
+@{Empleado jefe = null; }
+@{List<Empleado> administradores = new List<Empleado>(); }
+@{List<Empleado> mantenimiento = new List<Empleado>(); }
+@{List<Empleado> limpieza = new List<Empleado>(); }
+@{List<Empleado> recepcionistas = new List<Empleado>(); }
 
-            <th>
-                Jefe
-            </th>
-            <th>
-                Administración
-            </th>
-            <th>
-                Recepcionista
-            </th>
-            <th>
-                Limpieza
-            </th>
-            <th>
-                Mantenimiento
-            </th>
+@foreach (var e in lista)
+{
+    if (e.Cargo == CargoEnum.JEFE)
+    {
 
-        </tr>
-    </thead>
-    <tbody>
-       
-       
+        jefe = e;
+    }
+    else if (e.Cargo == CargoEnum.ADMINISTRACION)
+    {
+
+        administradores.Add(e);
+    }
+    else if (e.Cargo == CargoEnum.RECEPCIONISTA)
+    {
+
+        recepcionistas.Add(e);
+    }
+    else if (e.Cargo == CargoEnum.LIMPIEZA)
+    {
+
+        limpieza.Add(e);
+    }
+    else if (e.Cargo == CargoEnum.MANTENIMIENTO)
+    {
+
+        mantenimiento.Add(e);
+    }
+
+}
+
+<div class="container">
+    <!-- Chart goes here -->
+    <label>Jefe</label>
+    <h1 class="level-1 rectangle">@jefe.Nombre</h1>
+
+    Administradores
+    <ol class="level-2-wrapper">
+
+        @foreach (var e in administradores)
+        {
+            <li>
+                <h2 class="level-2 rectangle">@e.Nombre</h2>
+            </li>
+
+        }
+    </ol>
+    Recepcionistas
+    <ol class="level-2-wrapper">
+
+        @foreach (var e in recepcionistas)
+        {
+            <li>
+                <h2 class="level-2 rectangle">@e.Nombre</h2>
+            </li>
+
+        }
+    </ol>
+
+    Maestranza
+    <ol class="level-2-wrapper">
+        <li>
+            Mantenimiento
+            <ol class="level-3-wrapper">
+
+                @foreach (var e in mantenimiento)
+                {
+                    <li>
+                        <h2 class="level-3 rectangle">@e.Nombre</h2>
+                    </li>
+
+                }
+
+            </ol>
+        </li>
 
 
-    </tbody>
+        <li>
 
 
+            Limpieza
+            <ol class="level-3-wrapper">
 
+                @foreach (var e in limpieza)
+                {
+                    <li>
+                        <h2 class="level-3 rectangle">@e.Nombre</h2>
+                    </li>
 
+                }
 
-    </table>
+            </ol>
+        </li>
+    </ol>
 
+</div>

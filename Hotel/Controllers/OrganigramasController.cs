@@ -20,7 +20,8 @@ namespace Hotel.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Empleados.ToList());
+            ViewBag.Empleados = _context.Empleados.ToList();
+            return View();
         }
 
 
