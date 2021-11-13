@@ -105,7 +105,13 @@ namespace Hotel.Controllers
 
             return hab;
         }
+        private Habitacion BuscarHabitacionNumero(int Numero)
+        {
+            Habitacion hab = _context.Habitaciones
+                    .FirstOrDefault(m => m.Numero == Numero);
 
+            return hab;
+        }
 
 
         public IActionResult DarMantenimiento(int id)
@@ -156,10 +162,49 @@ namespace Hotel.Controllers
 
         }
 
-        //public LimpiarHabitacion()
-        //{
+        public IActionResult Alquilar() {
 
-        //}
+            List<Habitacion> habitaciones = _context.Habitaciones.ToList();
+            List<Habitacion> habitacionesLibres = new List<Habitacion> ();
+
+            foreach (var h in habitaciones) { 
+             if(h.Ocupacion == EstadoDeUsos.LIBRE) {
+
+                    habitacionesLibres.Add(h);
+
+            }
+
+            }
+            ViewBag.HabitacionesLibres = habitacionesLibres;
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Alquilar(int Numero,DateTime entrada,DateTime salida)
+        {
+
+            var hBuscada = BuscarHabitacionNumero(Numero);
+
+            if (hBuscada != null) {
+                hBuscada.Entrada = entrada;
+                hBuscada.Salida = salida;
+
+                 _context.Update(hBuscada);
+                _context.SaveChanges();
+
+                    }
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
 
 
     }

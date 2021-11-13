@@ -18,6 +18,9 @@ namespace Hotel.Models
         public  Empleado EmpleadoAcargo { get; set; }
 
 
+
+
+
         [Required]
         public int Numero { get; set; }
         

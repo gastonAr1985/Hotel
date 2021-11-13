@@ -1,0 +1,68 @@
+﻿@model Hotel.Models.Habitacion
+
+@{
+    ViewData["Title"] = "Alquilar";
+}
+
+@{
+    var HabitacionesLibres = ViewBag.HabitacionesLibres;
+}
+
+    <h1>Alquilar Habitacion</h1>
+
+    <hr />
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <form asp-action="Alquilar">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Entrada" class="control-label"></label>
+                    <input asp-for="Entrada" class="form-control" />
+                    <span asp-validation-for="Entrada" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Salida" class="control-label"></label>
+                    <input asp-for="Salida" class="form-control" />
+                    <span asp-validation-for="Salida" class="text-danger"></span>
+                </div>
+
+
+
+
+
+
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label"></label>
+
+                    <select asp-for="Numero" class="form-control">
+
+                        @foreach (var h in HabitacionesLibres) {
+
+                            <option>@h.Numero</option>
+                            
+
+                        }
+                        </select>
+
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Alquilar" class="btn btn-primary" />
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
