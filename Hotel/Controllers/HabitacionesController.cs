@@ -87,7 +87,7 @@ namespace Hotel.Controllers
             hab.TipoMantenimiento = tipoMantenimiento;
             hab.Mantenimiento = true;
             hab.Ocupacion = EstadoDeUsos.FUERA_DE_USO;
-
+            hab.Estado = true;
             _context.Update(hab);
             _context.SaveChanges();
 
@@ -120,6 +120,7 @@ namespace Hotel.Controllers
 
                 hab.Mantenimiento = false;
                 hab.TipoMantenimiento = 0;
+                hab.Estado = false;
 
                 _context.Update(hab);
                 _context.SaveChanges();

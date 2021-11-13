@@ -27,7 +27,7 @@ namespace Hotel
         {
             services.AddControllersWithViews();
             services.AddDbContext<HotelContext>(options =>
-                options.UseSqlServer(@"Data Source =GASTON\SQLEXPRESS01 ;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;"));
+                options.UseSqlServer(@"Data Source =DESKTOP-H3A2N73\BD;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,7 +21,7 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.EmpleadoAcargo)
+                <p>Empleado Responsable</p>
             </th>
 
         </tr>
@@ -45,7 +45,7 @@
 
                     @if (item.Estado)
                     {
-                        <button >Mantenimiento</button>
+                        <button >En Mantenimiento</button>
                     }
                     else { 
                 
@@ -59,14 +59,14 @@
                     @if (item.Mantenimiento != false)
                     {
                         @*<input asp-controller="Habitaciones" asp-action="DarMantenimiento" asp-route-id="@item.Id" type="button" class="btn btn alert-primary" style="background:red" value="Mantenimiento">*@
-                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantnimiento</a>
+                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantenimiento</a>
                     }
 
                     else
                     {
 
                         <button type="button" style="background:green">Lista</button>
-                        <a asp-action="InformarMantenimiento" asp-route-id="@item.Id">in</a>
+                        @*<a asp-action="InformarMantenimiento" asp-route-id="@item.Id">Informar</a>*@
                     }
                 </td>
                 <td>
@@ -76,11 +76,7 @@
 
                 <td>
                 </td>
-                <td>
-                   
-                    <a asp-action="Seleccion" asp-route-id="@item.Id">Selecionar</a>
-
-                </td>
+                
             </tr>
         }
     </tbody>
