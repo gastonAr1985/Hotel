@@ -4,14 +4,16 @@ using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20211113012833_hab")]
+    partial class hab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,9 +116,6 @@ namespace Hotel.Migrations
                     b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Entrada")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
@@ -128,12 +127,6 @@ namespace Hotel.Migrations
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
-
-                    b.Property<int>("Ocupacion")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Salida")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("TipoMantenimiento")
                         .HasColumnType("int");

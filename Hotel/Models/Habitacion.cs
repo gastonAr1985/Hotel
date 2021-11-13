@@ -26,6 +26,15 @@ namespace Hotel.Models
 
        
         public bool Estado { get; set; }
+
+        [Display (Name="Fecha de Ingreso")]
+        public DateTime Entrada { get; set; }
+
+
+        [Display(Name = "Fecha de Salida")]
+        public DateTime Salida { get; set; }
+
+        public EstadoDeUsos Ocupacion { get; set; }
         
         
     }

@@ -45,27 +45,30 @@
 
                     @if (item.Estado)
                     {
-                        <button ></button>
+                        <button >Mantenimiento</button>
                     }
                     else { 
                 
-                         <button></button>
+                         <button>Lista</button>
                     }
 
                     </td>
 
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Mantenimiento)*@
-                    @if (item.Mantenimiento)
+                    @if (item.Mantenimiento != false)
                     {
-                        <button ;></button>
+                        @*<input asp-controller="Habitaciones" asp-action="DarMantenimiento" asp-route-id="@item.Id" type="button" class="btn btn alert-primary" style="background:red" value="Mantenimiento">*@
+                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantnimiento</a>
                     }
+
                     else
                     {
-                
-                       <button></button>
+
+                        <button type="button" style="background:green">Lista</button>
+                        <a asp-action="InformarMantenimiento" asp-route-id="@item.Id">in</a>
                     }
-</td>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => Emp.Nombre)
                 </td>
