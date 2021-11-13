@@ -1,0 +1,110 @@
+﻿@model Hotel.Models.Empleado
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    var Antiguedad = ViewData["Antiguedad"];
+}
+
+
+@if (Model != null)
+{
+    <h1>Empleado Encontrado</h1>
+
+    <p>
+        <a asp-action="Index">Lista de EMpleados</a>
+    </p>
+
+    <form asp-controller="Empleadoes" asp-action="BuscarEmpleado">
+        <p>
+            <input type="text" name="NombreEmpleado" placeholder="Ingrese el Empleado" />
+            <input type="submit" value="Buscar" />
+        </p>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellido)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaIngreso)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TurnoEnum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cargo)
+                </th>
+                <th>
+                    <p> Años en la empresa </p>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sueldo)
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Apellido)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.FechaIngreso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TurnoEnum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Cargo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Antiguedad)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Sueldo)
+                    </td>
+
+                    <td>
+                    </td>
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        <a asp-action="Seleccion" asp-route-id="@Model.Id">Selecionar</a>
+
+                    </td>
+                </tr>
+           
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>No encontramos nada</h1>
+
+    <p>
+        <a asp-action="Index">Lista de Empleados</a>
+    </p>
+
+
+}

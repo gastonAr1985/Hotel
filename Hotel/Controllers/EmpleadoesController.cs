@@ -26,19 +26,10 @@ namespace Hotel.Controllers
         }
 
         // GET: Empleadoes
-        public async Task<IActionResult> Index(/*string NombreEmpleado = null*/)
+        public async Task<IActionResult> Index()
         {
 
            
-            /// Aca me traigo el empleado para poder filtrarlo en la busqueda
-
-            //var emp = from e in _context.Empleados select e;
-
-            //if (!String.IsNullOrEmpty(NombreEmpleado))
-            //{
-            //    emp = emp.Where(s => s.Nombre!.Contains(NombreEmpleado));
-
-            //}
             
             
             return View(await _context.Empleados.ToListAsync());
@@ -280,5 +271,26 @@ namespace Hotel.Controllers
             return (tel.ToList());
         }
 
+        public IActionResult buscarEmpleado(string NombreEmpleado)
+        {
+
+            // Aca me traigo el empleado para poder filtrarlo en la busqueda
+
+           
+
+            Empleado emp = null;
+
+            if (!String.IsNullOrEmpty(NombreEmpleado))
+            {
+                emp = _context.Empleados.FirstOrDefault(e => e.Nombre == NombreEmpleado);
+                
+            }
+            else
+            {
+                emp = null;
+            }
+            ViewData["emp"] = emp;
+            return View(emp);
+        }
     }
 }
