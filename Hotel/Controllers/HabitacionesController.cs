@@ -121,6 +121,7 @@ namespace Hotel.Controllers
                 hab.Mantenimiento = false;
                 hab.TipoMantenimiento = 0;
                 hab.Estado = false;
+                hab.Ocupacion = EstadoDeUsos.LIBRE;
 
                 _context.Update(hab);
                 _context.SaveChanges();
