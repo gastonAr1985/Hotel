@@ -98,7 +98,7 @@ namespace Hotel.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,Cargo,Telefonos")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,Cargo")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +110,8 @@ namespace Hotel.Controllers
                 
                
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Create","Telefonos");
             }
             return View(empleado);
         }
