@@ -188,23 +188,117 @@ namespace Hotel.Controllers
             var hBuscada = BuscarHabitacionNumero(Numero);
 
             if (hBuscada != null) {
-                hBuscada.Entrada = entrada;
-                hBuscada.Salida = salida;
 
-                 _context.Update(hBuscada);
-                _context.SaveChanges();
+                if (validarAlquiler(hBuscada,salida))
+                {
+                    hBuscada.Entrada = entrada;
+                    hBuscada.Salida = salida;
 
-                    }
+                    _context.Update(hBuscada);
+                    _context.SaveChanges();
+                }
+               
 
+            }
+
+            confirmarIngreso(Numero,entrada);
 
             return RedirectToAction("Index");
         }
 
 
+        public bool validarAlquiler(Habitacion h, DateTime fi)
+        {
+            bool sePuede = false;
+            
+
+            if (h != null)
+            {
+                if(h.Salida.Date.Month < fi.Date.Month)
+                {
+                    sePuede = true;
+                }
+            }
 
 
+            return sePuede;
+        }
 
+        public void confirmarIngreso(int Numero, DateTime fi)
+        {
+            var h = BuscarHabitacionNumero(Numero);
+            if (fi <= DateTime.Now)
+            {
+                h.Ocupacion = EstadoDeUsos.OCUPADA;
+                _context.Update(h);
+                _context.SaveChanges();
+            }
+        }
 
+        public void confirmarSalida(int Numero, DateTime ff)
+        {
+            var h = BuscarHabitacionNumero(Numero);
+            if (ff == DateTime.Now)
+            {
+                h.Ocupacion = EstadoDeUsos.LIBRE;
+                h.Salida = default;
+                h.Entrada = default;
+
+                _context.Update(h);
+                _context.SaveChanges();
+            }
+        }
+
+        public IActionResult ListaHabitacionesPorEstado(int num)
+        {
+            List<Habitacion> h = _context.Habitaciones.ToList();
+
+            List<Habitacion> mostrables = new List<Habitacion>();
+
+            switch (num)
+            {
+                case 1:
+                   
+                    foreach (var hab in h)
+                    {
+                        if (hab.Ocupacion == EstadoDeUsos.LIBRE)
+                        {
+                            mostrables.Add(hab);
+                        }
+                       
+                    }
+                    
+                    break;
+                   
+
+                case 2:
+
+                    
+                    foreach (var hab in h)
+                    {
+                        if (hab.Ocupacion == EstadoDeUsos.OCUPADA)
+                        {
+                            mostrables.Add(hab);
+                        }
+
+                    }
+                    break;
+                   
+                case 3:
+
+                    foreach (var hab in h)
+                    {
+                        if (hab.Ocupacion == EstadoDeUsos.FUERA_DE_USO)
+                        {
+                            mostrables.Add(hab);
+                        }
+
+                    }
+                    break;
+            }
+
+            return View(mostrables);
+        }
 
 
     }

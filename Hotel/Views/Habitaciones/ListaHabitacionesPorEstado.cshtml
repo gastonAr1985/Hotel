@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Hotel.Models.Habitacion>
+
+<h4>Lista Habitaciones por estado</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Mantenimiento)
+            </th>
+
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+          
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+
+
+
+                </td>
+
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Mantenimiento)*@
+                    @if (item.Mantenimiento != false)
+                    {
+                        @*<input asp-controller="Habitaciones" asp-action="DarMantenimiento" asp-route-id="@item.Id" type="button" class="btn btn alert-primary" style="background:red" value="Mantenimiento">*@
+                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantenimiento</a>
+                    }
+
+                    else
+                    {
+
+                        <button type="button" style="background:green">Lista</button>
+                        @*<a asp-action="InformarMantenimiento" asp-route-id="@item.Id">Informar</a>*@
+                    }
+                </td>
+
+
+
+
+                
+
+            </tr>
+        }
+    </tbody>
+    <a asp-action="index" > Volver </a>
+</table>

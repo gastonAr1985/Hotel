@@ -5,6 +5,26 @@
 <p>
     <a asp-action="Crear">Agregar Habitacion</a>
 </p>
+
+<div class="form-group">
+    <label class="control-label"></label>
+
+
+    <form asp-action="ListaHabitacionesPorEstado">
+        <label>Buscar Habitaciones por estados</label>
+        <select asp-ac class="form-control" name="num" >
+            <option>Selecciona un tipo de estado</option>
+            <option value="1">Habitaciones Libres</option>
+            <option value="2">Habitaciones Ocupadas</option>
+            <option value="3">Habitaciones en Reparacion</option>
+        </select><
+        <div class="form-group">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+</div>
 <table class="table">
     <thead>
         <tr>
