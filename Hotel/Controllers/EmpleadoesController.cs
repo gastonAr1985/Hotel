@@ -123,6 +123,20 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
+            var turnos = new List<TurnoEnum>();
+
+            foreach (TurnoEnum t in Enum.GetValues(typeof(TurnoEnum)))
+            {
+                turnos.Add(t);
+            }
+            ViewData["tr"] = turnos;
+
+            var cargos = new List<CargoEnum>();
+            foreach (CargoEnum c in Enum.GetValues(typeof(CargoEnum)))
+            {
+                cargos.Add(c);
+            }
+            ViewData["car"] = cargos;
 
             var empleado = await _context.Empleados.FindAsync(id);
             if (empleado == null)
@@ -134,7 +148,7 @@ namespace Hotel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,Cargo")] Empleado empleado)
         {
             if (id != empleado.Id)
             {

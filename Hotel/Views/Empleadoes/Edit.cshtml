@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@{ List<TurnoEnum> listaTurnos = (List<TurnoEnum>)ViewData["tr"]; }
+@{ List<CargoEnum> listaCargos = (List<CargoEnum>)ViewData["car"]; }
 
-<h1>Edit</h1>
+<h1>Editar Empleado</h1>
 
 <h4>Empleado</h4>
 <hr />
@@ -13,7 +15,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            
+
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -36,18 +38,37 @@
             </div>
             <div class="form-group">
                 <label asp-for="TurnoEnum" class="control-label"></label>
-                <select asp-for="TurnoEnum" class="form-control"></select>
+                <select asp-for="TurnoEnum" class="form-control">
+
+                    @foreach (TurnoEnum turno in listaTurnos)
+                    {
+                        <option>@turno.ToString()</option>
+                    }
+
+                </select>
                 <span asp-validation-for="TurnoEnum" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Cargo" class="control-label"></label>
+                <select asp-for="Cargo" class="form-control">
+
+                    @foreach (CargoEnum car in listaCargos)
+                    {
+                        <option>@car.ToString()</option>
+                    }
+
+                </select>
+                <span asp-validation-for="Cargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a la lista</a>
 </div>
 
 @section Scripts {
