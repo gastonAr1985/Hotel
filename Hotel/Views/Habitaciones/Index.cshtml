@@ -67,11 +67,16 @@
 
                     @if (item.Estado)
                     {
-                        <button >En Mantenimiento</button>
+                        <button type="button" style="background:violet">En Mantenimiento</button>
+                    }
+                    else if (item.Ocupacion == EstadoDeUsos.LIBRE)
+                    {
+
+                         <button type="button" style="background:green">Lista</button>
                     }
                     else { 
-                
-                         <button>Lista</button>
+                    
+                     <button type="button" style="background:red">Ocupada</button>
                     }
 
                     </td>
@@ -109,7 +114,7 @@
                     <a  asp-action="DesocuparHabitacion" asp-route-id="@item.Id"> Desocupar </a>
                     }
                     else{
-                    <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantenimiento</a>
+                <button type="button" style="background:red">Fuera de uso</button>
                     }
 
                 </td>
