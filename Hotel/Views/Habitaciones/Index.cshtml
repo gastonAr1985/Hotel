@@ -17,7 +17,7 @@
             <option value="1">Habitaciones Libres</option>
             <option value="2">Habitaciones Ocupadas</option>
             <option value="3">Habitaciones en Reparacion</option>
-        </select><
+        </select>
         <div class="form-group">
             <input type="submit" value="Buscar" class="btn btn-primary" />
         </div>
@@ -98,8 +98,20 @@
                
 
                 <td>
+                    @if (item.Ocupacion == EstadoDeUsos.LIBRE)
+                    {
+
                     <a  asp-action="OcuparHabitacion" asp-route-id="@item.Id"> Ocupar </a>
+
+                    }
+                    else if(item.Ocupacion == EstadoDeUsos.OCUPADA) {
+
                     <a  asp-action="DesocuparHabitacion" asp-route-id="@item.Id"> Desocupar </a>
+                    }
+                    else{
+                    <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantenimiento</a>
+                    }
+
                 </td>
                 
             </tr>

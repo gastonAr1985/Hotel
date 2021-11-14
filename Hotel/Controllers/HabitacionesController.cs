@@ -136,7 +136,7 @@ namespace Hotel.Controllers
             
            
         }
-        public void OcuparHabitacion(int id)
+        public IActionResult OcuparHabitacion(int id)
         {
             Habitacion h = BuscarHabitacion(id);
 
@@ -146,10 +146,10 @@ namespace Hotel.Controllers
                 _context.Update(h);
                 _context.SaveChanges();
             }
-            
+            return RedirectToAction("Index");
         }
 
-        public void DesocuparHabitacion(int id)
+        public IActionResult DesocuparHabitacion(int id)
         {
             Habitacion h = BuscarHabitacion(id);
 
@@ -159,7 +159,7 @@ namespace Hotel.Controllers
                 _context.Update(h);
                 _context.SaveChanges();
             }
-
+            return RedirectToAction("Index");
         }
 
         public IActionResult Alquilar() {
