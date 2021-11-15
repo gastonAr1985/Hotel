@@ -75,14 +75,19 @@
     function validarFecha() {
         var fe = new Date()
         var fs = new Date()
+        var hoy = new Date()
         fe = Date.parse(document.getElementById('fe').value);
         fs = Date.parse(document.getElementById('fs').value);
-
+        var hoy1 = Date.parse(hoy);
 
         if (fs < fe) {
             alert('La fecha de salida no puede ser anterior a la fecha de entrada');
             return false;
-        } else {
+        } else if (fe < hoy1) {
+            alert('La fecha de entrada no puede ser anterior a la fecha de hoy');
+            return false;
+        }else
+        {
             alert('Ud. va a reservar la habitacion');
             return true;
         }
