@@ -20,13 +20,13 @@
 
             <div class="form-group">
                 <label asp-for="Entrada" class="control-label"></label>
-                <input asp-for="Entrada" class="form-control" />
+                <input id="fe" asp-for="Entrada" class="form-control" />
                 <span asp-validation-for="Entrada" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Salida" class="control-label"></label>
-                <input asp-for="Salida" class="form-control" />
+                <input id="fs" asp-for="Salida" class="form-control" />
                 <span asp-validation-for="Salida" class="text-danger"></span>
             </div>
 
@@ -54,10 +54,11 @@
 
             <br />
             <div class="form-group">
-                <input type="submit" value="Alquilar" class="btn btn-primary" />
+
+                <input type="submit" value="Alquilar" class="btn btn-primary" onclick="return validarFecha()") />
             </div>
         </form>
-
+       
     </div>
 
 
@@ -67,3 +68,25 @@
 <div>
     <a asp-action="Index">Volver a la lista</a>
 </div>
+
+<script>
+    
+    
+    function validarFecha() {
+        var fe = new Date()
+        var fs = new Date()
+        fe = Date.parse(document.getElementById('fe').value);
+        fs = Date.parse(document.getElementById('fs').value);
+
+
+        if (fs < fe) {
+            alert('La fecha de salida no puede ser anterior a la fecha de entrada');
+            return false;
+        } else {
+            alert('Ud. va a reservar la habitacion');
+            return true;
+        }
+           
+    }
+
+</script>

@@ -36,7 +36,7 @@ namespace Hotel.Models
 
 
         [Display(Name = "Fecha de Salida")]
-        public DateTime Salida { get; set; }
+        public DateTime  Salida { get; set; }
 
         public EstadoDeUsos Ocupacion { get; set; }
         

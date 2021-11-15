@@ -46,16 +46,19 @@ namespace Hotel.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (ValidarNumero(habitacion.Numero))
+                {
+                    _context.Add(habitacion);
 
-              _context.Add(habitacion);
+                    await _context.SaveChangesAsync();
 
-               await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                   return RedirectToAction(nameof(Index));
+                }
+                
             }
-           
+            return RedirectToAction(nameof(Index));
 
-            return View(habitacion);
+            // return View(habitacion);
         }
 
         public IActionResult InformarMantenimiento(int? id)
@@ -156,6 +159,8 @@ namespace Hotel.Controllers
             if (h.Ocupacion == EstadoDeUsos.OCUPADA && h.Ocupacion != EstadoDeUsos.FUERA_DE_USO)
             {
                 h.Ocupacion = EstadoDeUsos.LIBRE;
+                h.Entrada = DateTime.MinValue;
+                h.Salida = DateTime.MinValue;
                 _context.Update(h);
                 _context.SaveChanges();
             }
@@ -301,7 +306,21 @@ namespace Hotel.Controllers
         }
 
 
+        public bool ValidarNumero(int numero)
+        {
+            bool esValido = true;
+            List<Habitacion> hab = _context.Habitaciones.ToList();
+           
+            foreach(var h in hab){
+                if (h.Numero == numero)
+                {
+                    esValido = false;
+                }
+            }
 
+            return esValido;
+
+        }
         
 
 
