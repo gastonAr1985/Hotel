@@ -8,16 +8,17 @@
 }
 <h1>Lista de Empleados</h1>
 
-<p>
-    <a asp-action="Create">Crear Nuevo Empleado</a>
-</p>
-
 <form asp-controller="Empleadoes" asp-action="BuscarEmpleado">
     <p>
-         <input type="text" name="NombreEmpleado" placeholder="Ingrese el Empleado" />
+        <input type="text" name="NombreEmpleado" placeholder="Ingrese el Empleado" />
         <input type="submit" value="Buscar" />
     </p>
 </form>
+<p>
+    <a asp-action="Create" class="btn btn-primary" style="font-size:small">Crear Nuevo Empleado</a>
+</p>
+
+
 <table class="table">
     <thead>
         <tr>
