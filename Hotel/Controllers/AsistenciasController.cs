@@ -172,5 +172,15 @@ namespace Hotel.Controllers
         {
             return _context.Asistencia.Any(e => e.AsistenciaId == id);
         }
+        public async Task<IActionResult> Contador()
+        {
+
+            ViewBag.Empleados = await _context.Empleados.ToListAsync();
+            ViewBag.Asistencias = await _context.Asistencia.ToListAsync();
+
+            return View();
+        }
+
+
     }
 }

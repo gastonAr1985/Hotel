@@ -8,13 +8,13 @@
 <h1>Registro de Asistencias</h1>
 
 <p>
-    <a asp-action="Create">Crear nueva asistencia</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nueva asistencia</a>
 </p>
 
 <form asp-controller="Asistencias" asp-action="Index">
     <p>
-        Title: <input type="text" name="nombre" />
-        <input type="submit" value="Filter" />
+        Empleado: <input type="text" name="nombre" />
+        <input type="submit" value="Filtrar" />
     </p>
 </form>
 <table class="table">
@@ -49,9 +49,9 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.AsistenciaId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.AsistenciaId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.AsistenciaId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.AsistenciaId">Editar</a> 
+                    <a asp-action="Details" asp-route-id="@item.AsistenciaId">Detalles</a> 
+                    <a asp-action="Delete" asp-route-id="@item.AsistenciaId">Borrar</a>
                 </td>
             </tr>
         }
