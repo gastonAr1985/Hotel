@@ -56,7 +56,7 @@ namespace Hotel.Controllers
                 }
                 
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ErrorDuplicado");
 
             // return View(habitacion);
         }
@@ -321,7 +321,12 @@ namespace Hotel.Controllers
             return esValido;
 
         }
+
+        public IActionResult ErrorDuplicado() {
+
+            return View();
         
+        }
 
 
 
