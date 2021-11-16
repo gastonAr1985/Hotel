@@ -28,6 +28,7 @@ namespace Hotel.Controllers
         // GET: Empleadoes
         public async Task<IActionResult> Index()
         {
+            
 
             return View(await _context.Empleados.ToListAsync());
         }
@@ -101,6 +102,7 @@ namespace Hotel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Password,Nombre,Apellido,Sueldo,FechaIngreso,TurnoEnum,Cargo")] Empleado empleado)
         {
+
             if (ModelState.IsValid)
             {
 
@@ -326,7 +328,7 @@ namespace Hotel.Controllers
                 Value = x.Id.ToString()
             }).ToList();
 
-
+            Empleado emp = BuscarEmpleadoId(id);
 
             var listaAsistencia = _context.Asistencia.ToList();
             var Presente = 0;
@@ -348,7 +350,8 @@ namespace Hotel.Controllers
                     Ausente++;
                 }
             }
-            Empleado emp = BuscarEmpleadoId(id);
+            
+
             ViewBag.Presente = Presente;
             ViewBag.Tarde = Tarde;
             ViewBag.Ausente = Ausente;

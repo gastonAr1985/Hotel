@@ -48,6 +48,7 @@ namespace Hotel.Controllers
         public IActionResult Create()
         {
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "Id", "Apellido");
+
             return View();
         }
 

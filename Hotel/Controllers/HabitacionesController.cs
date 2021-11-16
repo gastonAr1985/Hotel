@@ -91,6 +91,7 @@ namespace Hotel.Controllers
             hab.Mantenimiento = true;
             hab.Ocupacion = EstadoDeUsos.FUERA_DE_USO;
             hab.Estado = true;
+
             _context.Update(hab);
             _context.SaveChanges();
 

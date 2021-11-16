@@ -1,4 +1,4 @@
-﻿@model Hotel.Models.Empleado
+﻿
 
 @{var lista = ViewBag.Empleados;}
 
@@ -6,7 +6,7 @@
 
 <h1> Organigrama de la empresa</h1>
 <hr />
-@{Empleado jefe = null; }
+@{List<Empleado> jefes = new List<Empleado>(); }
 @{List<Empleado> administradores = new List<Empleado>(); }
 @{List<Empleado> mantenimiento = new List<Empleado>(); }
 @{List<Empleado> limpieza = new List<Empleado>(); }
@@ -22,7 +22,7 @@
     if (e.Cargo == CargoEnum.JEFE)
     {
 
-        jefe = e;
+        jefes.Add(e);
     }
     else if (e.Cargo == CargoEnum.ADMINISTRACION)
     {
@@ -50,7 +50,11 @@
 <div class="container">
     <!-- Chart goes here -->
     <label>Jefe</label>
-    <h1 class="level-1 rectangle">@jefe.Nombre</h1>
+    @foreach (var e in jefes) {
+<li>
+    <h1 class="level-1 rectangle">@e.Nombre</h1>
+</li>
+    }
 
     Administradores
     <ol class="level-2-wrapper">
