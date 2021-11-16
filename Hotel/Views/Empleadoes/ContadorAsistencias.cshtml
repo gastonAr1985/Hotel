@@ -1,0 +1,96 @@
+﻿@model Hotel.Models.Empleado
+
+@{
+    ViewData["Title"] = "ContadorAsistencias";
+
+
+}
+
+@{var emp = ViewBag.Empleados; }
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ContadorAsistencias">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Empleado</label>
+
+                <select name="id" class="form-control" asp-items="@ViewBag.Empleados">
+                    <option>Selecione un Empleado</option>
+                </select>
+
+                <span class="text-danger"></span>
+            </div>
+
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Ver Asistencias" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellido
+                </th>
+
+                <th>
+                    Presentes
+                </th>
+
+                <th>
+                    Tardes
+                </th>
+                <th>
+                    Ausentes
+                </th>
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Apellido)
+                </td>
+                <td>
+                    @ViewBag.Presente
+                </td>
+                <td>
+                    @ViewBag.Tarde
+                </td>
+                <td>
+                    @ViewBag.Ausente
+                </td>
+
+                <td>
+                    <div style="color:forestgreen">
+                        <a asp-action="Index" class="btn btn-primary">Volver a la lista</a>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

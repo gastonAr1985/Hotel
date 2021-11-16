@@ -305,5 +305,62 @@ namespace Hotel.Controllers
             ViewData["emp"] = emp;
             return View(emp);
         }
-    }
+
+        public Empleado BuscarEmpleado(int id) {
+
+            Empleado emp = null;
+            if (id != 0)
+            {
+                emp = _context.Empleados.Find(id);
+            }
+
+            return emp;
+        }
+
+
+        public IActionResult ContadorAsistencias(int id)
+        {
+            ViewBag.Empleados = _context.Empleados.Select(x => new SelectListItem
+            {
+                Text = x.Nombre,
+                Value = x.Id.ToString()
+            }).ToList();
+
+
+
+            var listaAsistencia = _context.Asistencia.ToList();
+            var Presente = 0;
+            var Tarde = 0;
+            var Ausente = 0;
+
+            foreach (Asistencia a in listaAsistencia)
+            {
+                if (a.EmpleadoId == id && a.Estado == AsistenciaEnum.PRESENTE)
+                {
+                    Presente++;
+                }
+                else if (a.EmpleadoId == id && a.Estado == AsistenciaEnum.TARDE)
+                {
+                    Tarde++;
+                }
+                else if (a.EmpleadoId == id && a.Estado == AsistenciaEnum.AUSENTE)
+                {
+                    Ausente++;
+                }
+            }
+            Empleado emp = BuscarEmpleado(id);
+            ViewBag.Presente = Presente;
+            ViewBag.Tarde = Tarde;
+            ViewBag.Ausente = Ausente;
+
+
+            return View(emp);
+        }
+    
+
+
+
+
+
+}
 }
