@@ -91,6 +91,8 @@ namespace Hotel.Controllers
         // GET: Asistencias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            
+
             if (id == null)
             {
                 return NotFound();
@@ -101,15 +103,16 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Empleaditos= _context.Empleados.ToList();
+            ViewData["ListaEnums"] = ObtenerEnums();
+
             return View(asistencia);
         }
 
-        // POST: Asistencias/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
+        public async Task<IActionResult> Edit(int id,[Bind("AsistenciaId,Dia,Estado,EmpleadoId")] Asistencia asistencia)
         {
             if (id != asistencia.AsistenciaId)
             {
@@ -120,6 +123,7 @@ namespace Hotel.Controllers
             {
                 try
                 {
+                    
                     _context.Update(asistencia);
                     await _context.SaveChangesAsync();
                 }
@@ -181,6 +185,17 @@ namespace Hotel.Controllers
             return View();
         }
 
+        public List<AsistenciaEnum> ObtenerEnums() {
+
+            var Asistencia = new List<AsistenciaEnum>();
+
+            foreach (AsistenciaEnum a in Enum.GetValues(typeof(AsistenciaEnum)))
+            {
+
+                Asistencia.Add(a);
+            }
+            return Asistencia;
+        }
 
     }
 }

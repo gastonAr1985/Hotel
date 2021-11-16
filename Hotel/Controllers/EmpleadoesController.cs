@@ -47,6 +47,7 @@ namespace Hotel.Controllers
             ViewData["telefonos"] = ListaDeTelefonos(id);
             ViewBag.sueldo = CalcularSueldo(id);
             ViewBag.antiguedad = CalcularAntiguedad(id);
+
             return View(empleado);
         }
         // GET: Empleadoes/Details/5

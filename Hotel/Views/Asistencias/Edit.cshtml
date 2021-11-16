@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-
+@{ List<AsistenciaEnum> Lista = (List<AsistenciaEnum>)ViewData["ListaEnums"];}
+@{ List<Empleado> ListaEmpleados = ViewBag.Empleaditos;}
 
 <h4>Editar asistencia</h4>
 <hr />
@@ -13,19 +13,37 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AsistenciaId" />
+
+            <div class="form-group">
+                <label asp-for="EmpleadoId" class="control-label"></label>
+                <input disabled asp-for="EmpleadoId" class="form-control" />
+                <span asp-validation-for="EmpleadoId" class="text-danger"></span>
+            </div>
+
+
             <div class="form-group">
                 <label asp-for="Dia" class="control-label"></label>
                 <input asp-for="Dia" class="form-control" />
                 <span asp-validation-for="Dia" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <select asp-for="Estado" class="form-control"></select>
+                <label asp-for="Estado" class="control-label">Asistencia</label>
+                <select asp-for="Estado" class="form-control">
+                    @foreach (AsistenciaEnum asistencia in Lista)
+                    {
+                        <option>@asistencia.ToString()</option>
+                    }
+                </select>
                 <span asp-validation-for="Estado" class="text-danger"></span>
+
             </div>
+
+
+
             <br />
             <div class="form-group">
-                <input type="submit" value="Guardar Cambios" class="btn btn-primary" style="color:lawngreen"/>
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" style="color:lawngreen" />
             </div>
         </form>
     </div>
