@@ -41,10 +41,10 @@
                 @Html.DisplayNameFor(model => model.Cargo)
             </th>
             <th>
-               Años trabajados
+                @Html.DisplayNameFor(model => model.Sueldo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sueldo)
+                Años trabajados
             </th>
             
 
@@ -74,20 +74,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Cargo)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Antiguedad)
+            <td>   
+                @Html.DisplayFor(modelItem => item.Sueldo)
 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sueldo)
+                @Html.DisplayFor(modelItem => item.Antiguedad)
             </td>
             
             <td>
             </td>
             <td>
-               
-                <a asp-action="Seleccion" asp-route-id="@item.Id" class="btn btn-primary">Seleccionar</a>
-
+                <div style="color:forestgreen">
+                    <a asp-action="Seleccion" asp-route-id="@item.Id" class="btn btn-primary">Seleccionar</a>
+                </div>
             </td>
         </tr>
         }
