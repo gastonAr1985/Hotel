@@ -306,7 +306,7 @@ namespace Hotel.Controllers
             return View(emp);
         }
 
-        public Empleado BuscarEmpleado(int id) {
+        public Empleado BuscarEmpleadoId(int id) {
 
             Empleado emp = null;
             if (id != 0)
@@ -348,7 +348,7 @@ namespace Hotel.Controllers
                     Ausente++;
                 }
             }
-            Empleado emp = BuscarEmpleado(id);
+            Empleado emp = BuscarEmpleadoId(id);
             ViewBag.Presente = Presente;
             ViewBag.Tarde = Tarde;
             ViewBag.Ausente = Ausente;

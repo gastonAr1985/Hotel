@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,10 +19,8 @@ namespace Hotel.Models
         public  Empleado EmpleadoAcargo { get; set; }
 
 
-
-
-
-        [Required]
+        [Required(ErrorMessage = ErrorMsg.Requerido)]
+        [Range(1, 50, ErrorMessage = ErrorMsg.Rango)]
         public int Numero { get; set; }
         
         public bool Mantenimiento { get; set; }

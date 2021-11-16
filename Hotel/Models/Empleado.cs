@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,16 +29,24 @@ namespace Hotel.Models
         public CargoEnum Cargo { get; set; }
 
             
-            [Required]
-            public string Nombre { get; set; }
+         
+        [Required(ErrorMessage = ErrorMsg.Requerido)]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = ErrorMsg.StringMaxMin)]
+        
+        public string Nombre { get; set; }
 
-            [Required]
-            public string Apellido { get; set; }
+
+        [Required(ErrorMessage = ErrorMsg.Requerido)]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = ErrorMsg.StringMaxMin)]
+        public string Apellido { get; set; }
         public int Antiguedad { get; set; }
 
-        [Required]
-             [Display(Name = "Sueldo Base")]
-            public double Sueldo { get; set; }
+
+        [Required(ErrorMessage = ErrorMsg.Requerido)]
+        [DataType(DataType.Currency)]
+        [Range(1, 99999999, ErrorMessage = ErrorMsg.Rango)]
+        [Display(Name = "Sueldo Base")]
+        public double Sueldo { get; set; }
 
             [Required]
             [Display(Name = "Fecha de Ingreso")]
