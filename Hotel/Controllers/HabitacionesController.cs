@@ -220,7 +220,7 @@ namespace Hotel.Controllers
 
             if (h != null)
             {
-                if(h.Salida.Date.Month < fi.Date.Month)
+                if(h.Salida < fi)
                 {
                     sePuede = true;
                 }
@@ -329,6 +329,25 @@ namespace Hotel.Controllers
         
         }
 
+        //simula un automatico
+        [HttpPost]
+        public IActionResult AutoOcupar()
+        {
+            List<Habitacion> h = _context.Habitaciones.ToList();
+            foreach (var i in h)
+            {
+                if (i.Entrada <= DateTime.Now && i.Ocupacion == EstadoDeUsos.LIBRE && i.Entrada != default)
+                {
+                    //i.Ocupacion = EstadoDeUsos.OCUPADA;
+                    //_context.Update(i);
+                    //_context.SaveChanges();
+                    OcuparHabitacion(i.Id);
+                }
+
+            }
+
+            return RedirectToAction("Index");
+        }
 
 
     }

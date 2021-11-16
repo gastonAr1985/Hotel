@@ -125,3 +125,18 @@
     </tbody>
 </table>
 
+<script>
+
+    function actualizar() {
+        $.ajax({
+            url: "@Url.Action("AutoOcupar")",
+            type: "POST",
+            cache: false
+
+        })
+        
+        setTimeout(actualizar, 1000);
+    }
+
+    setTimeout(actualizar, 1000);
+    </script>
