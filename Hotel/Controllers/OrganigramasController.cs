@@ -21,6 +21,7 @@ namespace Hotel.Controllers
         public IActionResult Index()
         {
             ViewBag.Empleados = _context.Empleados.ToList();
+
             if (ViewBag.Empleados.Count == 0) { 
             
                 return RedirectToAction("Error");

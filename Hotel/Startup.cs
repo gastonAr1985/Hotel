@@ -1,4 +1,5 @@
 using Hotel.Models;
+using Hotel.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,8 @@ namespace Hotel
             services.AddControllersWithViews();
             services.AddDbContext<HotelContext>(options =>
                 options.UseSqlServer(@"Data Source =DESKTOP-H3A2N73\BD;" + " Initial Catalog = HOTEL_ORT;" + " Integrated Security = true;"));
+            services.AddSingleton<ITelefonosService, TelefonosService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

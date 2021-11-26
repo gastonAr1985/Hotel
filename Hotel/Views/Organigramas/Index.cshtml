@@ -1,65 +1,33 @@
 ﻿
 
-@{var lista = ViewBag.Empleados;}
+
 
 <link href="~/lib/bootstrap/dist/css/Organigrama.css" rel="stylesheet" />
 
 <h1> Organigrama de la empresa</h1>
+
 <hr />
-@{List<Empleado> jefes = new List<Empleado>(); }
-@{List<Empleado> administradores = new List<Empleado>(); }
-@{List<Empleado> mantenimiento = new List<Empleado>(); }
-@{List<Empleado> limpieza = new List<Empleado>(); }
-@{List<Empleado> recepcionistas = new List<Empleado>(); }
 
 
+@{List<Empleado> lista = ViewBag.Empleados;}
 
 
-
-
-@foreach (var e in lista)
-{
-    if (e.Cargo == CargoEnum.JEFE)
-    {
-
-        jefes.Add(e);
-    }
-    else if (e.Cargo == CargoEnum.ADMINISTRACION)
-    {
-
-        administradores.Add(e);
-    }
-    else if (e.Cargo == CargoEnum.RECEPCIONISTA)
-    {
-
-        recepcionistas.Add(e);
-    }
-    else if (e.Cargo == CargoEnum.LIMPIEZA)
-    {
-
-        limpieza.Add(e);
-    }
-    else if (e.Cargo == CargoEnum.MANTENIMIENTO)
-    {
-
-        mantenimiento.Add(e);
-    }
-
-}
 
 <div class="container">
-    <!-- Chart goes here -->
+
     <label>Jefe</label>
-    @foreach (var e in jefes) {
-<li>
-    <h1 class="level-1 rectangle">@e.Nombre</h1>
-</li>
+
+    @foreach (var e in (from e in lista where e.Cargo == CargoEnum.JEFE select e).ToList())
+    {
+
+        <h1 class="level-1 rectangle">@e.Nombre</h1>
+
     }
 
     Administradores
     <ol class="level-2-wrapper">
 
-        @foreach (var e in administradores)
+        @foreach (var e in (from e in lista where e.Cargo == CargoEnum.ADMINISTRACION select e).ToList())
         {
             <li>
                 <h2 class="level-2 rectangle">@e.Nombre</h2>
@@ -70,7 +38,7 @@
     Recepcionistas
     <ol class="level-2-wrapper">
 
-        @foreach (var e in recepcionistas)
+        @foreach (var e in (from e in lista where e.Cargo == CargoEnum.RECEPCIONISTA select e).ToList())
         {
             <li>
                 <h2 class="level-2 rectangle">@e.Nombre</h2>
@@ -85,7 +53,7 @@
             Mantenimiento
             <ol class="level-3-wrapper">
 
-                @foreach (var e in mantenimiento)
+                @foreach (var e in (from e in lista where e.Cargo == CargoEnum.MANTENIMIENTO select e).ToList())
                 {
                     <li>
                         <h2 class="level-3 rectangle">@e.Nombre</h2>
@@ -103,7 +71,7 @@
             Limpieza
             <ol class="level-3-wrapper">
 
-                @foreach (var e in limpieza)
+                @foreach (var e in (from e in lista where e.Cargo == CargoEnum.LIMPIEZA select e).ToList())
                 {
                     <li>
                         <h2 class="level-3 rectangle">@e.Nombre</h2>

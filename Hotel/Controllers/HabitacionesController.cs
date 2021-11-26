@@ -1,4 +1,5 @@
 ﻿using Hotel.Models;
+using Hotel.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,11 @@ namespace Hotel.Controllers
     public class HabitacionesController : Controller
     {
         private readonly HotelContext _context;
-
-        public HabitacionesController(HotelContext context)
+        private ITelefonosService _telefonosServices;
+        public HabitacionesController(HotelContext context, ITelefonosService telefonosService)
         {
             _context = context;
+            _telefonosServices = telefonosService;
         }
 
         public IActionResult Index()
@@ -107,6 +109,7 @@ namespace Hotel.Controllers
             Habitacion hab = _context.Habitaciones
                     .FirstOrDefault(m => m.Id == id);
 
+           
             return hab;
         }
         private Habitacion BuscarHabitacionNumero(int Numero)

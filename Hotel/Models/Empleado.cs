@@ -52,12 +52,7 @@ namespace Hotel.Models
             [Display(Name = "Fecha de Ingreso")]
             public DateTime FechaIngreso { get; set; }
         
-       
-
-          
         
-           
-           
 
         }
     }

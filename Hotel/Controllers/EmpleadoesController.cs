@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hotel.Models;
+using Hotel.Services;
 
 namespace Hotel.Controllers
 {
@@ -19,10 +20,12 @@ namespace Hotel.Controllers
         
 
         private readonly HotelContext _context;
+        private ITelefonosService _telefonosServices;
 
-        public EmpleadoesController(HotelContext context)
+        public EmpleadoesController(HotelContext context, ITelefonosService telefonosService)
         {
             _context = context;
+            _telefonosServices = telefonosService;
         }
 
         // GET: Empleadoes
@@ -37,6 +40,12 @@ namespace Hotel.Controllers
             var empleado = await _context.Empleados
                .FirstOrDefaultAsync(m => m.Id == id);
 
+            
+
+            var numerito = _telefonosServices.getTelefono("001");
+
+            ViewData["numerito"] = numerito;
+            // traeme el primer empleado que tiene el id tanto.
 
             if (empleado == null)
             {
@@ -51,7 +60,8 @@ namespace Hotel.Controllers
 
             return View(empleado);
         }
-        // GET: Empleadoes/Details/5
+
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -249,7 +259,11 @@ namespace Hotel.Controllers
         }
 
         public double CalcularSueldo(int id) {
-            
+
+             // se puede hacer la logica en la clase. [NotMapped] - metodo util helper
+            // consultar por este metodo en la clase.
+
+
             double sueldoTotal = 0;
             var empleado =  _context.Empleados
                 .FirstOrDefault(m => m.Id == id);
@@ -305,6 +319,7 @@ namespace Hotel.Controllers
                 emp = null;
             }
             ViewData["emp"] = emp;
+
             return View(emp);
         }
 
@@ -350,7 +365,7 @@ namespace Hotel.Controllers
                     Ausente++;
                 }
             }
-            
+
 
             ViewBag.Presente = Presente;
             ViewBag.Tarde = Tarde;
