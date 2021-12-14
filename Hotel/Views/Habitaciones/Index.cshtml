@@ -87,7 +87,7 @@
                     @if (item.Mantenimiento != false)
                     {
                         @*<input asp-controller="Habitaciones" asp-action="DarMantenimiento" asp-route-id="@item.Id" type="button" class="btn btn alert-primary" style="background:red" value="Mantenimiento">*@
-                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id">Dar Mantenimiento</a>
+                        <a asp-action="DarMantenimiento" asp-route-id="@item.Id" class="btn btn-warning">Dar Mantenimiento</a>
                     }
 
                     else
